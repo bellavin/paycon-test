@@ -1,27 +1,35 @@
 import React, {ReactNode} from 'react';
-import {
-  GestureResponderEvent,
-  Pressable,
-  PressableStateCallbackType,
-  StyleSheet,
-} from 'react-native';
+import {GestureResponderEvent, Pressable, StyleSheet, View} from 'react-native';
 import {Colors} from '../constants';
 
 interface Props {
-  children?: ReactNode | ((state: PressableStateCallbackType) => ReactNode);
+  disabled: boolean;
+  children?: ReactNode;
   onPress?: (event: GestureResponderEvent) => void;
 }
 
-function Button({onPress: handlePress, children}: Props): JSX.Element {
+function Button({
+  disabled,
+  onPress: handlePress,
+  children,
+}: Props): JSX.Element {
   return (
-    <Pressable
-      onPress={handlePress}
-      style={({pressed}) => [
-        {backgroundColor: pressed ? Colors.primaryHover : Colors.primary},
-        styles.button,
-      ]}>
-      {children}
-    </Pressable>
+    <>
+      {!disabled ? (
+        <Pressable
+          onPress={handlePress}
+          style={({pressed}) => [
+            {backgroundColor: pressed ? Colors.primaryHover : Colors.primary},
+            styles.button,
+          ]}>
+          {children}
+        </Pressable>
+      ) : (
+        <View style={[{backgroundColor: 'gray'}, styles.button]}>
+          {children}
+        </View>
+      )}
+    </>
   );
 }
 

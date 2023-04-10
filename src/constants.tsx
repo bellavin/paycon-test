@@ -17,3 +17,6 @@ export enum Routes {
   api1 = 'https://paycon.su/api1.php',
   api2 = 'https://paycon.su/api2.php',
 }
+
+export const FILES_URL =
+  'https://bellavin.github.io/paycon-test/download/test2.csv';
